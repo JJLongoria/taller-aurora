@@ -1,0 +1,73 @@
+<div [ngClass]="floatingLabel ? 'form-floating' : ''">
+    <label *ngIf="label && !floatingLabel"
+           class="form-label text-truncate"><span *ngIf="isRequired"
+              style="margin-right: 5px; color: red">*</span>{{label}} <app-icon *ngIf="help"
+                  [height]="15"
+                  src="help.svg"
+                  [ngbTooltip]="help"></app-icon></label>
+    <div class="input-group dropdown"
+         ngbDropdown
+         #dropdown="ngbDropdown"
+         container="body">
+        <span class="input-group-text input-group-text-dark">
+            <app-icon src="search.svg"
+                      [height]="15"></app-icon>
+        </span>
+        <input type="text"
+               class="form-control"
+               [placeholder]="placeholder"
+               [readonly]="readonly"
+               [disabled]="disabled"
+               [value]="getValue()"
+               (input)="onChange($event)"
+               ngbDropdownToggle
+               (click)="onClickInput()"
+               (blur)="onBlur()">
+        <ng-content></ng-content>
+        <ul class="dropdown-menu dropdown-menu-dark"
+            *ngIf="!disabled && !readonly"
+            style="width: 90%"
+            [id]="dropDownId"
+            ngbDropdownMenu>
+            <li *ngFor="let record of recordsToShow"
+                class="dropdown-list-item dropdown-list-item-dark">
+                <a ngbDropdownItem
+                   *ngIf="record"
+                   class="dropdown-item dropdown-item-dark"
+                   (click)="onClickRecord(record)"
+                   style="cursor: pointer;"
+                   [disabled]="disabled || readonly">
+                    <span *ngIf="icon"
+                          style="margin-right: 5px;">
+                        <app-icon [src]="icon"
+                                  [height]="15"></app-icon>
+                    </span>{{record[labelField]}}</a>
+            </li>
+            <li *ngIf="!recordsToShow || recordsToShow.length === 0"
+                class="dropdown-list-item dropdown-list-item-dark px-3">{{messageWhenRecordsNotFound}}</li>
+        </ul>
+    </div>
+    <label *ngIf="label && floatingLabel"
+           class="form-label">{{label}} <app-icon *ngIf="help"
+                  [height]="15"
+                  src="help.svg"
+                  [ngbTooltip]="help"></app-icon></label>
+    <div *ngIf="multiple && selectedRecords.length > 0"
+         style="margin-top: 3px;">
+        <app-pill *ngFor="let record of selectedRecords; index as i"
+                  [label]="record[labelField]"
+                  [value]="record"
+                  [removable]="true"
+                  style="margin-right: 5px;"
+                  (onRemove)="onRemovePill(i)"></app-pill>
+    </div>
+    <div *ngIf="control.invalid && (control.dirty || control.touched)"
+         class="text-danger mt-1">
+        <div *ngIf="control.errors?.['required']" class="text-danger">
+            {{messageWhenValueIsMissing}}
+        </div>
+        <div *ngIf="control.errors?.['filter']" class="text-danger">
+            {{messageWhenFilterNotMatch}}
+        </div>
+    </div>
+</div>

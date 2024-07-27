@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-4">
+        <app-search-input label="Producto"
+                          [control]="formGroup.controls.productId"
+                          model="Product"
+                          messageWhenRecordsNotFound="No se encontraron productos"
+                          messageWhenValueIsMissing="El producto es obligatorio"
+                          [disabled]="isViewAction"
+                          [required]="true">
+            <app-button type="secondary"
+                        [outline]="true"
+                        srcIcon="preview.svg"
+                        [iconSize]="15"
+                        (onClick)="previewProduct()"
+                        [disabled]="!formGroup.controls.productId.value">
+
+            </app-button>
+        </app-search-input>
+    </div>
+    <div class="col-4">
+        <app-search-input label="Variante del Producto"
+                          [control]="formGroup.controls.productVariantId"
+                          [records]="productVariants"
+                          model="ProductVariant"
+                          messageWhenRecordsNotFound="No se encontraron variantes de producto asociadas al producto seleccionado"
+                          messageWhenValueIsMissing="La variante del producto es obligatoria"
+                          [disabled]="isViewAction || !formGroup.controls.productId.value"
+                          *ngIf="!loadingVariants"
+                          [required]="true">
+            <app-button type="secondary"
+                        [outline]="true"
+                        srcIcon="preview.svg"
+                        [iconSize]="15"
+                        (onClick)="previewVariant()"
+                        [disabled]="!formGroup.controls.productVariantId.value">
+            </app-button>
+        </app-search-input>
+        <app-spinner *ngIf="loadingVariants"
+                     [size]="5"></app-spinner>
+    </div>
+    <div class="col">
+        <app-number-input label="Cantidad"
+                          [control]="formGroup.controls.quantity"
+                          messageWhenValueIsMissing="La cantidad es obligatoria"
+                          messageWhenWrongMinValue="La cantidad debe ser mayor que 0"
+                          [disabled]="isViewAction || !formGroup.controls.productVariantId.value"
+                          [required]="true"></app-number-input>
+    </div>
+    <div class="col"
+         *ngIf="showCost">
+        <app-number-input label="Coste (€)"
+                          [control]="formGroup.controls.cost"
+                          [disabled]="true"></app-number-input>
+    </div>
+    <div class="col-auto pt-3"
+         *ngIf="!isViewAction">
+        <app-button type="danger"
+                    (onClick)="removeProduct()"
+                    srcIcon="trash.svg"></app-button>
+    </div>
+</div>
+<app-product-viewer-modal #productViewerModal></app-product-viewer-modal>
+<app-product-variant-viewer-modal #productVariantViewerModal></app-product-variant-viewer-modal>

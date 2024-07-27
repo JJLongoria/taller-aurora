@@ -1,0 +1,77 @@
+<app-page title="Compras">
+    <p style="font-size: 15px;">Página para la gestión de las compras de material.</p>
+    <p>Como en todas las pantallas principales, nos encontraremos una lista con los resultados y datos almacenados. No todas las listas se pueden filtrar, como en este caso.</p>
+    <p>Al mismo tiempo se podrán realizar determinadas acciones sobre los registros desde la columna de Acciones com Ver, Editar o Eliminar.</p>
+    <img src="./assets/img/help/Screenshot_7.png"
+         height="650">
+
+    <h2>Nueva Compra</h2>
+    <p style="font-size: 15px;">Para registrar una nueva compra de material, debemos hacer click en el botón de Nuevo, tras lo que nos aparecerá la ventana para registrar la compra. <br/>
+        Es obligatorio que exista previamente el material dado de alta en la plataforma para poder registrar una compra. Por ejemplo, Si vamos a registrar la compra de Mica Roja, primero creamos el material Mica Roja (si no lo tenemos ya) y después reigstramos la compra.</p>
+    <img src="./assets/img/help/Screenshot_9.png"
+         height="650">
+    <p>La pantalla de compras de material es una de las pantallas más "complejas" de la aplicación, debido a todas las distintas formas en las que podemos comprar un material.</p>
+    <p>A grandes rasgos, podemos diferenciar las compras de material en 2 tipos. Compras de un sólo material, o compras multimaterial, Por ejemplo: La compra de 1, 2 o 10 litros de una misma resina se considera una compra de un sólo material (aunque se compren muchos litros o botes). <br>
+    Como compra multimaterial, tendríamos el ejemplo de los botes de mica, donde en una misma compra nos vienen 5, 10 o 15 botes de Mica, de 5 gramos cada uno... Este en el fondo es una compra de 5 gramos para 5, 10 o 15 materiales</p>
+    <p>La forma de diferenciar una compra simple, de una compra multimaterial es por la forma de calcular el precio. Todas las compras con un precio por: Gramos/Unidad, Litros/Unidad, Metros/Unidad o Metros Cuadrados/Unidad son compras multimaterial.</p>
+    <p style="font-size: 15px;">Además, encontraremos los siguientes campos en el formulario (los campos obligatorios están marcados con asterisco rojo):</p>
+    <table class="table table-dark table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>ID de la compra. Se le asigna una vez que se crea y no se puede modificar nunca</td>
+            </tr>
+            <tr>
+                <th>Fecha de Compra</th>
+                <td>Fecha en la que se realiza la compra</td>
+            </tr>
+            <tr>
+                <th>Nombre del Vendedor</th>
+                <td>Nombre del vendedor para esta compra determinada</td>
+            </tr>
+            <tr>
+                <th>URL del Vendedor</th>
+                <td>Dirección WEB (URL) del vendedor (o del producto en cuestión)</td>
+            </tr>
+            <tr>
+                <th>Descripción</th>
+                <td>Campo para incluir una descripción sobre la compra si fuera necesario. No tiene límite, se puede escribir todo lo que sea necesario.</td>
+            </tr>
+            <tr>
+                <th>No actualizar la cantidad de material</th>
+                <td>Este campo sirve para indicar si se quiere que una compra en cuestión no repercuta en la cantidad de material.</td>
+            </tr>
+            <tr>
+                <th>No actualizar los precios del material</th>
+                <td>Campo para indicar si se quiere que esta compra repercuta sobre los precios del material. Un ejemplo para no actualzar los precios es, por ejemplo, una compra de material a un precio excesivamente caro (por necesidades) que puede alterar mucho los precios reales de los productos.</td>
+            </tr>
+            <tr>
+                <th>Precio por</th>
+                <td>Campo para indicar la forma en la que se va a calcular el precio de la compra. Este es uno de los campos más importantes de una compra, ya que sirve para determinar si es una compra simple o multimaterial, y la forma para calcular los precios.</td>
+            </tr>
+            <tr>
+                <th>Escala</th>
+                <td>Escala de la compra, por ejemplo, si compramos 10 gramos de mica, elegiremos "Gramos" en la escala. Si fueran 100 miligramos, elegiríamos "Miligramos" en la escala...</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
+                <td>Precio de la compra, es decir, el valor del producto comprado</td>
+            </tr>
+            <tr>
+                <th>Unidades</th>
+                <td>Este campo sólo es visible en las compras multimaterial, y servirá para indicar el número de unidades de la compra. Por ejemplo, una compra de mica de 10 botes de 5 gramos de distintos colores. En este campo indicaríamos los 10 botes.</td>
+            </tr>
+            <tr>
+                <th>Cantidad</th>
+                <td>Cantidad de material comprada en la unidad indicada por la forma de calcular el precio y la escala elegida. Por ejemplo, si hemos elegido el Precio por Gramos, y la escala en Miligramos, aqúi pondríamos el número de miligramos de la compra</td>
+            </tr>
+            <tr>
+                <th>Precio Relativo</th>
+                <td>Este valor se calcula de forma automática en función del precio de la compra, el número de unidades y la cantidad. Será el precio que se trasladará al material o materiales comprados.</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Sección de Materiales</h3>
+    <p style="font-size: 15px;">Tras los campos del formulario, nos encotramos una sección para seleccionar el o los materiales de la compra. En el caso de ser compras multimaterial, aparecerá un botón a la derecha con un símbolo + para aladir tantos materiales como sea necesario</p>
+    <p>Cuando el formulario sea válido (esten los campos obligatorios rellenos y con los valores correctos) se habilitarán los botones para guardar.</p>
+</app-page>

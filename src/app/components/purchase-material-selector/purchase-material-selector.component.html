@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-4">
+        <app-search-input label="Material"
+                          [control]="formGroup.controls.materialId"
+                          model="Material"
+                          messageWhenRecordsNotFound="No se encontraron materiales"
+                          messageWhenValueIsMissing="El material es obligatorio"
+                          [disabled]="isViewAction">
+            <app-button type="secondary"
+                        [outline]="true"
+                        srcIcon="preview.svg"
+                        [iconSize]="15"
+                        (onClick)="previewMaterial()"
+                        [disabled]="!formGroup.controls.materialId.value"></app-button>
+        </app-search-input>
+    </div>
+    <div class="col">
+        <div class="row p-2"
+             *ngIf="material">
+            <div class="col">
+                <dl class="row">
+                    <dt class="col-sm-4">Precio en</dt>
+                    <dd class="col-sm-8">{{priceCalculation}}</dd>
+                    <dt class="col-sm-4">Cantidad</dt>
+                    <dd class="col-sm-8">{{material.quantity}} {{quantityMagnitude}}</dd>
+                    <dt class="col-sm-4">Categoría(s)</dt>
+                    <dd class="col-sm-8">{{categories}}</dd>
+                </dl>
+            </div>
+            <div class="col">
+                <dl class="row">
+                    <dt class="col-sm-4">Precio Máximo</dt>
+                    <dd class="col-sm-8">{{material.highPrice}} {{priceCalculation}}</dd>
+                    <dt class="col-sm-4">Precio Mínimo</dt>
+                    <dd class="col-sm-8">{{material.lowPrice}} {{priceCalculation}}</dd>
+                    <dt class="col-sm-4">Precio Medio</dt>
+                    <dd class="col-sm-8">{{material.highPrice + material.lowPrice / 2}} {{priceCalculation}}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-auto pt-3"
+         *ngIf="!isViewAction">
+        <app-button type="danger"
+                    (onClick)="removeMaterial()"
+                    srcIcon="trash.svg"></app-button>
+    </div>
+</div>
+<app-material-viewer-modal #materialViewerModal></app-material-viewer-modal>

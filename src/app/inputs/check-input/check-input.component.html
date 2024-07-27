@@ -1,0 +1,18 @@
+<div class="form-check {{className}}"
+     style="width: fit-content; {{style}}">
+       <input type="checkbox"
+              style="margin-right: 5px;"
+              class="form-check-input form-check-input-green"
+              [readonly]="readonly"
+              [disabled]="disabled"
+              [formControl]="control">
+       <label *ngIf="label"
+              class="form-label text-truncate">{{label}} <app-icon *ngIf="help"
+                        [height]="15"
+                        src="help.svg"
+                        [ngbTooltip]="help"></app-icon></label>
+       <label class="form-label text-truncate"
+              *ngIf="!label">
+              <ng-content></ng-content>
+       </label>
+</div>

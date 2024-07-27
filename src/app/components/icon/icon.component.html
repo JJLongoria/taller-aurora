@@ -1,0 +1,2 @@
+<span *ngIf="!loading && name && !src" class="iconify no-clickable {{className}}" [style]="style" [attr.data-icon]="name" [attr.data-height]="height"></span>
+<img  *ngIf="!loading && src" [src]="path" loading="lazy" [height]="height" [style]="style" className="no-clickable {{className}}" [alt]="alt" (click)="handleClick()"/>

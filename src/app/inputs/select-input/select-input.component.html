@@ -1,0 +1,30 @@
+<div [ngClass]="floatingLabel ? 'form-floating' : ''">
+    <label *ngIf="label && !floatingLabel"
+           class="form-label text-truncate"><span *ngIf="isRequired"
+              style="margin-right: 5px; color: red">*</span>{{label}} <app-icon *ngIf="help"
+                  [height]="15"
+                  src="help.svg"
+                  [ngbTooltip]="help"></app-icon></label>
+    <div class="input-group">
+        <select class="form-select"
+                [multiple]="multiple"
+                [formControl]="control"
+                [size]="size"
+                [disabled]="disabled || readonly">
+            <option *ngFor="let item of items;"
+                    [value]="item.value">{{item.label}} </option>
+        </select>
+        <ng-content></ng-content>
+    </div>
+    <label *ngIf="label && floatingLabel"
+           class="form-label text-truncate">{{label}} <app-icon *ngIf="help"
+                  [height]="15"
+                  src="help.svg"
+                  [ngbTooltip]="help"></app-icon></label>
+    <div *ngIf="control.invalid && (control.dirty || control.touched)"
+         class="text-danger mt-1">
+        <div *ngIf="control.errors?.['required']" class="text-danger">
+            {{messageWhenValueIsMissing}}
+        </div>
+    </div>
+</div>

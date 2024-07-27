@@ -1,0 +1,126 @@
+<app-modal #modal
+           [title]="title">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-12 p-2">
+                <app-button text="Registrar Ventas"
+                            type="primary"
+                            style="float: right; margin-right: 5px;"
+                            (onClick)="addSale()"
+                            *ngIf="productVariant.id && !isEditAction"></app-button>
+                <app-button text="Añadir Producción"
+                            type="primary"
+                            style="float: right; margin-right: 5px;"
+                            (onClick)="addProduction()"
+                            *ngIf="productVariant.id && !isEditAction"></app-button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="col-6 p-2">
+                    <app-text-input label="Nombre"
+                                    [control]="form.controls.name"
+                                    [disabled]="isViewAction"
+                                    messageWhenValueIsMissing="El nombre de la variante del producto es obligatorio"></app-text-input>
+                </div>
+                <div class="col-6 p-2">
+                    <app-number-input label="Precio (€)"
+                                      [control]="form.controls.price"
+                                      [disabled]="true">
+                    </app-number-input>
+                </div>
+                <div class="col-12 p-2">
+                    <app-textarea-input label="Descripción"
+                                        [control]="form.controls.description"
+                                        [disabled]="isViewAction"></app-textarea-input>
+                </div>
+            </div>
+            <div class="col-4 p-2 text-center"
+                 style="max-height: 250px;">
+                <img *ngIf="imgPath"
+                     [src]="previewSrc"
+                     class="clickable"
+                     (click)="clickOnImage()"
+                     style="height: 100%; width: 100%; margin: 0 auto;" />
+                <app-icon *ngIf="!imgPath"
+                          src="camera.svg"
+                          class="clickable"
+                          (onClick)="clickOnImage()"
+                          style="height: 100%; width: 100%; margin: 0 auto;"></app-icon>
+            </div>
+            <div class="col-6 p-2">
+                <app-search-input label="Herramienta(s)"
+                                  model="Tool"
+                                  [query]="{
+                                    name: '{!value}',
+                                    broken: false
+                                  }"
+                                  [multiple]="true"
+                                  [control]="form.controls.tools"
+                                  [required]="true"
+                                  [readonly]="isViewAction"
+                                  messageWhenRecordsNotFound="No se han encontrado herramientas">
+                </app-search-input>
+            </div>
+            <div class="col-3 p-2">
+                <app-number-input label="Unidades Producidas"
+                                  [control]="form.controls.unitsProduced"
+                                  [disabled]="true">
+                </app-number-input>
+            </div>
+            <div class="col-3 p-2">
+                <app-number-input label="Unidades Vendidas"
+                                  [control]="form.controls.unitsSold"
+                                  [disabled]="true">
+                </app-number-input>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 p-2">
+                <h2>Materiales ({{form.controls.materials.controls.length}})</h2>
+            </div>
+            <div class="col-12 p-2"
+                 style="max-height: 400px; overflow: auto;"
+                 formArrayName="materials">
+                <ul class="list-group">
+                    <li *ngFor="let materialGroup of form.controls.materials.controls; index as i"
+                        class="list-group-item list-group-item-action list-group-item-dark">
+                        <app-material-selector [index]="i"
+                                               [formGroup]="materialGroup"
+                                               [isViewAction]="isViewAction"
+                                               [isEditAction]="isEditAction"
+                                               [isNewAction]="isNewAction"
+                                               (onRemove)="removeMaterial($event)"
+                                               (costChange)="costChange($event)"></app-material-selector>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12">
+                <app-button type="primary"
+                            srcIcon="add.svg"
+                            style="margin-right: 5px; float: right;"
+                            (onClick)="addMaterial()"
+                            *ngIf="!isViewAction"></app-button>
+            </div>
+        </div>
+    </form>
+    <div footer>
+        <app-button text="Editar"
+                    type="primary"
+                    style="margin-right: 5px;"
+                    (onClick)="edit()"
+                    *ngIf="isViewAction"></app-button>
+        <app-button text="Guardar"
+                    type="primary"
+                    style="margin-right: 5px;"
+                    (onClick)="save()"
+                    [disabled]="form.invalid"
+                    *ngIf="!isViewAction"></app-button>
+        <app-button text="Cancelar"
+                    type="secondary"
+                    (onClick)="cancel()"></app-button>
+    </div>
+</app-modal>
+<app-add-production-modal #addProductionModal></app-add-production-modal>
+<app-add-sales-modal #addSalesModal></app-add-sales-modal>
+<app-image-viewer-modal #imageViewerModal></app-image-viewer-modal>

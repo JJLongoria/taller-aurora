@@ -1,0 +1,30 @@
+<button *ngIf="!asLink"
+        class="btn {{styleClass}}"
+        [style]="style"
+        [disabled]="disabled"
+        (click)="onclick($event)"
+        type="button">
+    <app-icon *ngIf="(icon || srcIcon) && iconPosition === 'left'"
+              [name]="icon"
+              [src]="srcIcon"
+              [height]="iconSize"></app-icon>
+    {{text}}
+    <app-icon *ngIf="(icon || srcIcon) && iconPosition === 'right'"
+              [name]="icon"
+              [src]="srcIcon"
+              [height]="iconSize"></app-icon>
+</button>
+<a *ngIf="asLink"
+   class="btn {{styleClass}}"
+   [routerLink]="href"
+   [style]="style">
+    <app-icon *ngIf="(icon || srcIcon) && iconPosition === 'left'"
+              [name]="icon"
+              [src]="srcIcon"
+              [height]="iconSize"></app-icon>
+    {{text}}
+    <app-icon *ngIf="(icon || srcIcon) && iconPosition === 'right'"
+              [name]="icon"
+              [src]="srcIcon"
+              [height]="iconSize"></app-icon>
+</a>

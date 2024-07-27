@@ -1,0 +1,46 @@
+<app-modal #modal
+           title="Calculadora de Precios">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-6 p-2">
+                <app-select-input label="Precio por"
+                                  [control]="form.controls.priceCalculation"
+                                  [values]="priceCalculationOptions"></app-select-input>
+            </div>
+            <div class="col-6 p-2">
+                <app-select-input label="Escala"
+                                  *ngIf="scaleOptions"
+                                  [control]="form.controls.scale"
+                                  [values]="scaleOptions"></app-select-input>
+            </div>
+            <div [ngClass]="this.showUnits ? 'col-4 p-2' : 'col-6 p-2'">
+                <app-number-input label="Precio"
+                                  [control]="form.controls.price">
+                </app-number-input>
+            </div>
+            <div *ngIf="showUnits"
+                 class="col-4 p-2">
+                <app-number-input label="Unidades"
+                                  [control]="form.controls.units"></app-number-input>
+            </div>
+            <div [ngClass]="this.showUnits ? 'col-4 p-2' : 'col-6 p-2'">
+                <app-number-input [label]="quantityLabel"
+                                  [control]="form.controls.quantity">
+
+                </app-number-input>
+            </div>
+            <div class="col-12">
+                Precio: {{relativePrice}} € / {{unitPrice}}
+            </div>
+        </div>
+    </form>
+    <div footer>
+        <app-button type="primary"
+                    style="margin-right: 5px;"
+                    (click)="save()"
+                    text="Guardar"></app-button>
+        <app-button type="secondary"
+                    text="Cancelar"
+                    (onClick)="modal.dismiss()"></app-button>
+    </div>
+</app-modal>

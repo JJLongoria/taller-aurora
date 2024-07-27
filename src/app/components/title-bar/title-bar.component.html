@@ -1,0 +1,25 @@
+<div id="titlebar">
+    <nav>
+        <div id="winTitle">{{title}}</div>
+        <div id="buttons">
+            <div (click)="minimize($event)"
+                 id="minimize">
+                <span><app-icon src="chrome-minimize.svg"  alt="Mimimize" [height]="20"></app-icon></span>
+            </div>
+            <div *ngIf="!maximized"
+                 (click)="maximize($event)"
+                 id="maximize">
+                <span><app-icon src="chrome-maximize.svg"  alt="Maximize" [height]="20"></app-icon></span>
+            </div>
+            <div *ngIf="maximized"
+                 (click)="restore($event)"
+                 id="restore">
+                <span><app-icon src="chrome-restore.svg"  alt="Restore" [height]="20"></app-icon></span>
+            </div>
+            <div (click)="close($event)"
+                 id="closeWindow">
+                <span><app-icon src="chrome-close.svg"  alt="Close" [height]="20"></app-icon></span>
+            </div>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,28 @@
+<app-modal #modal
+           title="Calculadora de Superficies">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-6 p-2">
+                <app-number-input label="Largo ({{magnitude}})"
+                                  [control]="form.controls.length"
+                                  messageWhenValueIsMissing="El largo es obligatorio"
+                                  messageWhenWrongMinValue="El largo debe ser mayor que 0"></app-number-input>
+            </div>
+            <div class="col-6 p-2">
+                <app-number-input label="Ancho ({{magnitude}})"
+                                  [control]="form.controls.width"
+                                  messageWhenValueIsMissing="El ancho es obligatorio"
+                                  messageWhenWrongMinValue="El ancho debe ser mayor que 0"></app-number-input>
+            </div>
+        </div>
+    </form>
+    <div footer>
+        <app-button type="primary"
+                    style="margin-right: 5px;"
+                    (click)="save()"
+                    text="Guardar"></app-button>
+        <app-button type="secondary"
+                    text="Cancelar"
+                    (onClick)="modal.dismiss()"></app-button>
+    </div>
+</app-modal>

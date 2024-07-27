@@ -1,0 +1,49 @@
+<app-modal #modal
+           [title]="title">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-4 p-2">
+                <app-number-input label="Unidades"
+                                  [control]="form.controls.units"
+                                  help="Unidades Vendidas"
+                                  messageWhenValueIsMissing="Las unidades vendidas son obligatorias"
+                                  messageWhenWrongMinValue="Las unidades deben ser mayor que 0"></app-number-input>
+            </div>
+            <div class="col-4 p-2">
+                <app-number-input label="Precio (€)"
+                                  [control]="form.controls.price"
+                                  help="Precio de Venta de todas las unidades"
+                                  messageWhenValueIsMissing="El precio de venta de las unidades es obligatorio"
+                                  messageWhenWrongMinValue="El precio debe ser mayor o igual que 0"></app-number-input>
+            </div>
+            <div class="col-4 p-2">
+                <app-date-input label="Fecha de Venta"
+                                  [control]="form.controls.salesDate"
+                                  help="Precio de Venta de todas las unidades"
+                                  messageWhenValueIsMissing="La fecha de la venta es obligatoria"></app-date-input>
+            </div>
+            <div class="col-6 p-2">
+                <app-number-input label="Precio Unitario (€)"
+                                  [control]="form.controls.unitPrice"
+                                  help="Precio de cada unidad"
+                                  [disabled]="true"></app-number-input>
+            </div>
+            <div class="col-6 p-2">
+                <app-number-input label="Beneficios (€)"
+                                  [control]="form.controls.profit"
+                                  [disabled]="true"></app-number-input>
+            </div>
+        </div>
+    </form>
+    <div footer>
+        <app-button text="Guardar"
+                    type="primary"
+                    style="margin-right: 5px;"
+                    (onClick)="save()"
+                    [disabled]="form.invalid"
+                    *ngIf="!isViewAction"></app-button>
+        <app-button text="Cancelar"
+                    type="secondary"
+                    (onClick)="cancel()"></app-button>
+    </div>
+</app-modal>

@@ -1,0 +1,33 @@
+<app-modal #modal
+           [title]="title">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-6">
+                <app-text-input label="Id"
+                                [control]="form.controls.id"
+                                [disabled]="true"></app-text-input>
+            </div>
+            <div class="col-6">
+                <app-text-input label="Nombre"
+                                [control]="form.controls.name"
+                                messageWhenValueIsMissing="El nombre es obligatorio"
+                                [disabled]="isViewAction"></app-text-input>
+            </div>
+            <div class="col-12">
+                <app-textarea-input label="Descripción"
+                                    [control]="form.controls.description"
+                                    [disabled]="isViewAction"></app-textarea-input>
+            </div>
+        </div>
+    </form>
+    <div footer>
+        <app-button type="primary"
+                    style="margin-right: 5px;"
+                    (click)="save()"
+                    text="Guardar"
+                    *ngIf="!isViewAction"></app-button>
+        <app-button type="secondary"
+                    text="Cancelar"
+                    (onClick)="modal.dismiss()"></app-button>
+    </div>
+</app-modal>

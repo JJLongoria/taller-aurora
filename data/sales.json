@@ -1,0 +1,48 @@
+[
+  {
+    "id": "04b1d612-0c5d-4925-b554-5ea2411ce2bf",
+    "name": "V-00000001",
+    "number": 1,
+    "products": [
+      {
+        "product": "82aa8749-81a6-47b0-9026-5da3880f595d",
+        "productVariant": "656144ca-aa68-414b-94f3-6b671a11add2",
+        "units": 123,
+        "price": 12312,
+        "unitPrice": 100.098,
+        "profit": -135904.968
+      }
+    ],
+    "units": 123,
+    "price": 12312,
+    "profit": -135904.968,
+    "salesDate": "2023-09-09T00:00:00.000Z"
+  },
+  {
+    "id": "7e104e7d-4b31-4951-a4d8-a1b0ad2b4053",
+    "name": "V-00000002",
+    "number": 2,
+    "products": [
+      {
+        "product": "b2067c18-3c9b-43ec-a3be-b5f2b072a7aa",
+        "productVariant": "031f138d-3faa-46d9-9146-350d41b353f0",
+        "units": 5,
+        "price": 10,
+        "unitPrice": 2,
+        "profit": -85.15
+      },
+      {
+        "product": "82aa8749-81a6-47b0-9026-5da3880f595d",
+        "productVariant": "656144ca-aa68-414b-94f3-6b671a11add2",
+        "units": 2,
+        "price": 5,
+        "unitPrice": 2.5,
+        "profit": -2405.032
+      }
+    ],
+    "units": 7,
+    "price": 15,
+    "profit": -2490.182,
+    "salesDate": "2023-08-29T00:00:00.000Z"
+  }
+]

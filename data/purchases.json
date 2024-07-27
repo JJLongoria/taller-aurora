@@ -1,0 +1,25 @@
+[
+  {
+    "description": "asdasdasd",
+    "seller": {
+      "name": "asdasdas",
+      "url": "asdasdas"
+    },
+    "materialIds": [
+      "222debd1-131a-4226-9ab1-37dca91ccd69",
+      "4acf8179-cb8a-44cf-87cd-0d9f85eea2e5"
+    ],
+    "quantity": 12,
+    "totalPrice": 34,
+    "relativePrice": 1416.666667,
+    "priceCalculation": "l/u",
+    "date": "2023-08-30",
+    "units": 2,
+    "updateMaterialsPrice": false,
+    "updateMaterialsQuantity": true,
+    "scale": "ml",
+    "id": "0efab997-c57b-4c16-aabf-473fde932ce1",
+    "number": 1,
+    "name": "C-00000001"
+  }
+]

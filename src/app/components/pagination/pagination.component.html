@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div *ngIf="firstPageButton"
+         class="col-auto">
+        <app-button text="Primera Página"
+                    type="secondary"
+                    [outline]="true"
+                    srcIcon="chevron-double-left.svg"
+                    iconPosition="left"
+                    (onClick)="firstPage()"></app-button>
+    </div>
+    <div *ngIf="previousPageButton"
+         class="col-auto">
+        <app-button text="Atrás"
+                    type="secondary"
+                    [outline]="true"
+                    srcIcon="chevron-left.svg"
+                    iconPosition="left"
+                    (onClick)="previousPage()"></app-button>
+    </div>
+    <div class="col-auto">
+        <app-button *ngFor="let page of pagesToShow"
+                    [text]="page.value"
+                    [type]="page.variant"
+                    [outline]="page.outline"
+                    style="margin: 0px 5px"
+                    (onClick)="pageClick(page)"></app-button>
+    </div>
+    <div *ngIf="nextPageButton"
+         class="col-auto">
+        <app-button text="Siguiente"
+                    type="secondary"
+                    [outline]="true"
+                    srcIcon="chevron-right.svg"
+                    iconPosition="right"
+                    (onClick)="nextPage()"></app-button>
+    </div>
+    <div *ngIf="lastPageButton"
+         class="col-auto">
+        <app-button text="Última Página"
+                    type="secondary"
+                    [outline]="true"
+                    srcIcon="chevron-double-right.svg"
+                    iconPosition="right"
+                    (onClick)="lastPage()"></app-button>
+    </div>
+</div>

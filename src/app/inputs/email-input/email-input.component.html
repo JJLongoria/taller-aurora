@@ -1,0 +1,36 @@
+<div [ngClass]="floatingLabel ? 'form-floating' : ''">
+    <label *ngIf="label && !floatingLabel"
+           class="form-label text-truncate"><span *ngIf="isRequired"
+              style="margin-right: 5px; color: red">*</span>{{label}} <app-icon *ngIf="help"
+                  [height]="15"
+                  src="help.svg"
+                  [ngbTooltip]="help"></app-icon></label>
+    <div class="input-group">
+        <input type="email"
+               class="form-control"
+               [placeholder]="placeholder"
+               [readonly]="readonly"
+               [formControl]="control">
+        <ng-content></ng-content>
+    </div>
+    <label *ngIf="label && floatingLabel"
+           class="form-label text-truncate">{{label}} <app-icon *ngIf="help"
+                  [height]="15"
+                  src="help.svg"
+                  [ngbTooltip]="help"></app-icon></label>
+    <div *ngIf="control.invalid && (control.dirty || control.touched)"
+         class="text-danger mt-1">
+        <div *ngIf="control.errors?.['required']" class="text-danger">
+            {{messageWhenValueIsMissing}}
+        </div>
+        <div *ngIf="control.errors?.['minLength']" class="text-danger">
+            {{messageWhenWrongMinLengthValue}}
+        </div>
+        <div *ngIf="control.errors?.['maxLength']" class="text-danger">
+            {{messageWhenWrongMaxLengthValue}}
+        </div>
+        <div *ngIf="control.errors?.['pattern']" class="text-danger">
+            {{messageWhenWrongPattern}}
+        </div>
+    </div>
+</div>

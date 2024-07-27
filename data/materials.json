@@ -1,0 +1,62 @@
+[
+  {
+    "id": "222debd1-131a-4226-9ab1-37dca91ccd69",
+    "code": "",
+    "name": "test",
+    "description": "test",
+    "lowPrice": 0.146335,
+    "highPrice": 3400,
+    "priceCalculation": "l",
+    "categoryIds": [
+      "04cca64c-cbc1-4ebb-b243-0dedbc72b416",
+      "20fe88ac-f6af-4c69-be77-885483e10682"
+    ],
+    "quantity": 24.957,
+    "location": "123",
+    "obsolete": false,
+    "image": "D:/Workspace/Electron/epoxy/data/images/ac4ac05d-075c-47db-8c51-314d73de260b.jpg"
+  },
+  {
+    "id": "4acf8179-cb8a-44cf-87cd-0d9f85eea2e5",
+    "code": "",
+    "name": "yresdfsdf",
+    "description": "sdsdfsdf",
+    "lowPrice": 43,
+    "highPrice": 3,
+    "priceCalculation": "l",
+    "categoryIds": [
+      "04cca64c-cbc1-4ebb-b243-0dedbc72b416"
+    ],
+    "quantity": 345.012
+  },
+  {
+    "code": "abc",
+    "name": "abc",
+    "description": "asdsadasd",
+    "lowPrice": 0,
+    "highPrice": 0,
+    "priceCalculation": "g",
+    "image": "",
+    "categoryIds": [
+      "90e3f711-ef02-4f1b-bffc-5213e80c99c3"
+    ],
+    "quantity": 5,
+    "obsolete": false,
+    "id": "38cdad30-019b-435c-9e08-7e94d75e792f"
+  },
+  {
+    "code": "abd",
+    "name": "dcbv",
+    "description": "asd",
+    "lowPrice": 0,
+    "highPrice": 0,
+    "priceCalculation": "m2",
+    "image": "",
+    "categoryIds": [
+      "20fe88ac-f6af-4c69-be77-885483e10682"
+    ],
+    "quantity": 3,
+    "obsolete": false,
+    "id": "658ecffd-f951-43bd-bb51-79e33e480c3d"
+  }
+]

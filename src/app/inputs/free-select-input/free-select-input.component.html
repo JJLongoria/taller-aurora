@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-12"
+         *ngIf="label"><label class="form-label text-truncate"><span *ngIf="isRequired"
+                  style="margin-right: 5px; color: red">*</span>{{label}} <app-icon *ngIf="help"
+                      [height]="15"
+                      src="help.svg"
+                      [ngbTooltip]="help"></app-icon></label></div>
+    <div class="col">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <app-text-input [label]="sourceLabel"
+                                [control]="sourceControl"
+                                [disabled]="disabled">
+                </app-text-input>
+            </div>
+        </div>
+    </div>
+    <div class="col-auto">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <app-button type="secondary"
+                            [disabled]="disabled"
+                            (onClick)="add()"
+                            size="small"
+                            style="margin-bottom: 3px;"
+                            srcIcon="chevron-right.svg"></app-button>
+                <br>
+                <app-button type="secondary"
+                            [disabled]="disabled"
+                            (onClick)="remove()"
+                            size="small"
+                            style="margin-bottom: 3px;"
+                            srcIcon="chevron-left.svg"></app-button>
+                <br>
+                <app-button type="secondary"
+                            [outline]="true"
+                            [disabled]="disabled"
+                            (onClick)="removeAll()"
+                            size="small"
+                            style="margin-bottom: 3px;"
+                            srcIcon="chevron-double-left.svg"></app-button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <app-select-input [label]="targetLabel"
+                          [multiple]="true"
+                          [size]="size"
+                          [values]="selectedItems"
+                          [control]="targetControl"
+                          [disabled]="disabled">
+        </app-select-input>
+    </div>
+    <div class="col-auto">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <app-button type="secondary"
+                            size="small"
+                            [outline]="true"
+                            [disabled]="disabled"
+                            (onClick)="up()"
+                            style="margin-bottom: 3px;"
+                            srcIcon="chevron-up.svg"></app-button>
+                <br>
+                <app-button type="secondary"
+                            size="small"
+                            [outline]="true"
+                            [disabled]="disabled"
+                            (onClick)="down()"
+                            style="margin-bottom: 3px;"
+                            srcIcon="chevron-down.svg"></app-button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngIf="control.invalid && (control.dirty || control.touched)"
+             class="text-danger mt-1">
+            <div *ngIf="control.errors?.['required']" class="text-danger">
+                {{messageWhenValueIsMissing}}
+            </div>
+            <div *ngIf="control.errors?.['min']" class="text-danger">
+                {{messageWhenWrognMinLimit}}
+            </div>
+            <div *ngIf="control.errors?.['max']" class="text-danger">
+                {{messageWhenMaxLimitReached}}
+            </div>
+        </div>
+    </div>
+</div>

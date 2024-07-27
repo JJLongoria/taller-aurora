@@ -1,0 +1,83 @@
+[
+  {
+    "name": "test",
+    "description": "test",
+    "lowPrice": 0,
+    "highPrice": 0,
+    "avgPrice": 0,
+    "variants": [
+      {
+        "id": "11617679-813e-4f08-a187-9b37c023a6ab",
+        "name": "test",
+        "description": "test",
+        "price": 0,
+        "materials": [
+          {
+            "materialId": "222debd1-131a-4226-9ab1-37dca91ccd69",
+            "scale": "ml",
+            "quantity": 341,
+            "normalizedQuantity": 0.341
+          }
+        ],
+        "tools": [
+          "cbda55bf-ef66-41b1-9e12-de4d23036845",
+          "5a950f56-4736-435b-b127-f154f7a6dc33"
+        ],
+        "unitsSold": 140,
+        "image": "D:/Workspace/Electron/epoxy/data/images/6b872e25-b281-42dd-acdb-0b9a8b8db01a.jpg"
+      },
+      {
+        "id": "656144ca-aa68-414b-94f3-6b671a11add2",
+        "name": "sadsad",
+        "description": "asdasd",
+        "materials": [
+          {
+            "materialId": "222debd1-131a-4226-9ab1-37dca91ccd69",
+            "scale": "ml",
+            "quantity": 322,
+            "normalizedQuantity": 0.322
+          },
+          {
+            "materialId": "4acf8179-cb8a-44cf-87cd-0d9f85eea2e5",
+            "scale": "ml",
+            "quantity": 123,
+            "normalizedQuantity": 0.123
+          }
+        ],
+        "tools": [
+          "cbda55bf-ef66-41b1-9e12-de4d23036845"
+        ],
+        "unitsSold": 14
+      }
+    ],
+    "id": "82aa8749-81a6-47b0-9026-5da3880f595d",
+    "image": "D:/Workspace/Electron/epoxy/data/images/4a7a7e47-4635-439c-a50c-f86b6623b6cb.jpg"
+  },
+  {
+    "name": "Letra A Grande",
+    "description": "",
+    "variants": [
+      {
+        "id": "031f138d-3faa-46d9-9146-350d41b353f0",
+        "name": "Letra A grande roja y de flores",
+        "description": "",
+        "materials": [
+          {
+            "materialId": "222debd1-131a-4226-9ab1-37dca91ccd69",
+            "scale": "ml",
+            "quantity": 5,
+            "normalizedQuantity": 0.005
+          }
+        ],
+        "tools": [
+          "cbda55bf-ef66-41b1-9e12-de4d23036845"
+        ],
+        "image": "D:/Workspace/Electron/epoxy/data/images/321cf169-5370-4861-b533-0536f99eb2a4.jpg",
+        "unitsProduced": 11,
+        "unitsSold": 50
+      }
+    ],
+    "image": "",
+    "id": "b2067c18-3c9b-43ec-a3be-b5f2b072a7aa"
+  }
+]

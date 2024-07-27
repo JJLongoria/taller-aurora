@@ -1,0 +1,17 @@
+<app-modal #modal>
+    <div class="row"
+         style="color: white;">
+        <div class="col-12"
+             *ngIf="message">{{message}}</div>
+    </div>
+    <div footer>
+        <app-button *ngIf="!isAlert"
+                    type="secondary"
+                    [text]="cancelLabel"
+                    (onClick)="modal.dismiss()"></app-button>
+        <app-button [type]="buttonType"
+                    style="margin-left: 5px;"
+                    [text]="acceptLabel"
+                    (onClick)="modal.close()"></app-button>
+    </div>
+</app-modal>

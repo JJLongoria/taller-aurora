@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-6">
+        <app-search-input label="Producto"
+                          [control]="formGroup.controls.product"
+                          model="Product"
+                          messageWhenRecordsNotFound="No se encontraron productos"
+                          messageWhenValueIsMissing="El producto es obligatorio"
+                          [disabled]="isViewAction"
+                          [required]="true">
+            <app-button type="secondary"
+                        [outline]="true"
+                        srcIcon="preview.svg"
+                        [iconSize]="15"
+                        (onClick)="previewProduct()"
+                        [disabled]="!formGroup.controls.product.value">
+
+            </app-button>
+        </app-search-input>
+    </div>
+    <div class="col-6">
+        <app-search-input label="Variante del Producto"
+                          [control]="formGroup.controls.productVariant"
+                          [records]="productVariants"
+                          model="ProductVariant"
+                          messageWhenValueIsMissing="La variante del producto es obligatoria"
+                          messageWhenRecordsNotFound="No se encontraron variantes de producto asociadas al producto seleccionado"
+                          [disabled]="isViewAction || !formGroup.controls.product.value"
+                          [required]="true">
+            <app-button type="secondary"
+                        [outline]="true"
+                        srcIcon="preview.svg"
+                        [iconSize]="15"
+                        (onClick)="previewVariant()"
+                        [disabled]="!formGroup.controls.productVariant.value">
+            </app-button>
+        </app-search-input>
+    </div>
+    <div class="col-3 p-2">
+        <app-number-input label="Unidades"
+                          [control]="formGroup.controls.units"
+                          messageWhenValueIsMissing="Las unidades son obligatorias"
+                          messageWhenWrongMinValue="Las unidades deben ser mayor que 0"
+                          [readonly]="isViewAction"></app-number-input>
+    </div>
+    <div class="col-3 p-2">
+        <app-number-input label="Precio (€)"
+                          [control]="formGroup.controls.price"
+                          messageWhenValueIsMissing="El precio es obligatorio"
+                          messageWhenWrongMinValue="El precio debe ser mayor o igual que 0"
+                          [readonly]="isViewAction"></app-number-input>
+    </div>
+    <div class="col-3 p-2">
+        <app-number-input label="Precio Unitario (€)"
+                          [control]="formGroup.controls.unitPrice"
+                          help="Precio por unidad"
+                          [readonly]="true"></app-number-input>
+    </div>
+    <div class="col-3 p-2">
+        <app-number-input label="Beneficio (€)"
+                          [control]="formGroup.controls.profit"
+                          [readonly]="true"></app-number-input>
+    </div>
+</div>
+<app-product-viewer-modal #productViewerModal></app-product-viewer-modal>
+<app-product-variant-viewer-modal #productVariantViewerModal></app-product-variant-viewer-modal>

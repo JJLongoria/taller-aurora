@@ -1,0 +1,35 @@
+<app-modal #modal
+           [title]="title">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-8">
+                <div class="col-6 p-2">
+                    <app-text-input label="Nombre"
+                                    [control]="form.controls.name"
+                                    [readonly]="true"></app-text-input>
+                </div>
+                <div class="col-12 p-2">
+                    <app-textarea-input label="Descripción"
+                                        [control]="form.controls.description"
+                                        [readonly]="true"></app-textarea-input>
+                </div>
+            </div>
+            <div class="col-4">
+                <img *ngIf="previewImg"
+                     [src]="previewImg"
+                     class="clickable"
+                     (click)="clickOnImage()"
+                     style="height: 100%; width: 100%; margin: 0 auto;" />
+                <app-icon *ngIf="!previewImg"
+                          src="camera.svg"
+                          style="height: 100%; width: 100%; margin: 0 auto;"></app-icon>
+            </div>
+        </div>
+    </form>
+    <div footer>
+        <app-button text="Cerrar"
+                    type="secondary"
+                    (onClick)="cancel()"></app-button>
+    </div>
+</app-modal>
+<app-image-viewer-modal #imageViewerModal></app-image-viewer-modal>

@@ -1,0 +1,11 @@
+<div class="form-check form-switch">
+       <input class="form-check-input form-check-input-green"
+              type="checkbox"
+              role="switch"
+              [formControl]="control">
+       <label *ngIf="label"
+              class="form-check-label">{{label}} <app-icon *ngIf="help"
+                        [height]="15"
+                        src="help.svg"
+                        [ngbTooltip]="help"></app-icon></label>
+</div>

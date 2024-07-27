@@ -1,0 +1,19 @@
+<ngb-toast style="position: absolute; z-index: 10000;" *ngFor="let toast of toastService.toasts" [class]="toast.classname" [autohide]="true"
+    [delay]="toast.delay || 5000" (hidden)="toastService.remove(toast)">
+    <div class="row bg-opacity-75 {{toast.classname}}">
+        <div class="col-12 p-2">
+            <strong class="me-auto breakline">{{toast.header}}</strong>
+        </div>
+    </div>
+    <div class="row" *ngIf="toast.message">
+        <hr>
+        <div class="col-12 p-2">
+            <strong class="me-auto breakline">{{toast.message}}</strong>
+            <strong class="me-auto breakline" *ngIf="toast.link">
+                <a *ngIf="!toast.link.actionLink && !toast.link.useRouter" [href]="toast.link.url" class="inherit-color">{{toast.link.text}}</a>
+                <a *ngIf="!toast.link.actionLink && toast.link.useRouter" routerLink="toast.link.url" class="inherit-color">{{toast.link.text}}</a>
+                <a *ngIf="toast.link.actionLink" (click)="toast.link.action(toast.link.data)" routerLink="toast.link.url" class="inherit-color">{{toast.link.text}}</a>
+            </strong>
+        </div>
+    </div>
+</ngb-toast>

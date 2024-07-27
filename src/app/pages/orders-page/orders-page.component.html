@@ -1,0 +1,56 @@
+<app-page title="Encargos">
+    <div class="row">
+        <div class="col align-self-start">
+            <div class="row">
+                <div class="col-auto">
+                    <app-select-input label="Vistas"
+                                      [control]="listViewControl"
+                                      [values]="listViewOptions"></app-select-input>
+                </div>
+                <div class="col-auto">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-auto align-self-end">
+            <app-button text="Nuevo"
+                        style="margin-right: 5px"
+                        type="primary"
+                        [asLink]="true"
+                        href="/order/new"></app-button>
+            
+        </div>
+    </div>
+    <div *ngIf="!loading">
+        <div class="row mt-2"
+             *ngIf="this.orderService.getAll().length > 0">
+            <div class="col-12">
+                <app-datatable [columns]="columns"
+                               [data]="orders"
+                               [showRowNumber]="true"
+                               [showCheckbox]="true"
+                               [rowNumberOffset]="rowsOffset"
+                               keyField="id"
+                               (onRowAction)="handleRowAction($event)">
+
+                </app-datatable>
+            </div>
+            <div class="col-12">
+                <app-pagination [page]="currentPage"
+                                [maxPages]="maxPages"
+                                (onPageClick)="handleClickPage($event)"
+                                (onFirstPage)="handleClickPage($event)"
+                                (onLastPage)="handleClickPage($event)"
+                                (onPreviousPage)="handleClickPage($event)"
+                                (onNextPage)="handleClickPage($event)"></app-pagination>
+            </div>
+        </div>
+        <div class="row"
+             *ngIf="this.orderService.getAll().length == 0">
+            No hay encargos registrados
+        </div>
+    </div>
+    <div *ngIf="loading">
+        <app-spinner></app-spinner>
+    </div>
+</app-page>

@@ -1,0 +1,64 @@
+<app-page [title]="title">
+    <form [formGroup]="form">
+        <section>
+            <div class="row">
+                <div class="col-6 p-2">
+                    <app-text-input label="Nombre"
+                                    [control]="form.controls.name"
+                                    [readonly]="isViewAction"
+                                    messageWhenValueIsMissing="El nombre del cliente es obligatorio"></app-text-input>
+                </div>
+                <div class="col-6 p-2">
+                    <app-text-input label="Alias"
+                                    [control]="form.controls.alias"
+                                    [readonly]="isViewAction"></app-text-input>
+                </div>
+            </div>
+            <div *ngIf="!isNewAction"
+                 class="row">
+                <div class="col-12 mt-2">
+                    <h2>Encargos del Cliente</h2>
+                </div>
+                <div class="col-12"
+                     *ngIf="orders.length > 0"
+                     style="max-height: 300px;">
+                    <app-datatable [data]="orders"
+                                   [columns]="columns"
+                                   *ngIf="!loadingOrders"></app-datatable>
+                    <app-spinner *ngIf="loadingOrders"></app-spinner>
+                </div>
+                <div class="col-12 text-align-center"
+                     *ngIf="orders.length == 0">
+                    No hay encargos registrados para este cliente
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row justify-content-center">
+                <div class="col-auto p-2">
+                    <app-button text="Editar"
+                                type="primary"
+                                style="margin-right: 5px;"
+                                (onClick)="edit()"
+                                *ngIf="isViewAction"></app-button>
+                    <app-button text="Guardar"
+                                type="primary"
+                                style="margin-right: 5px;"
+                                (onClick)="save(false)"
+                                [disabled]="form.invalid"
+                                *ngIf="!isViewAction"></app-button>
+                    <app-button text="Guardar y Nuevo"
+                                type="primary"
+                                [outline]="true"
+                                style="margin-right: 5px;"
+                                (onClick)="save(true)"
+                                [disabled]="form.invalid"
+                                *ngIf="!isViewAction"></app-button>
+                    <app-button text="Cancelar"
+                                type="secondary"
+                                (onClick)="cancel()"></app-button>
+                </div>
+            </div>
+        </section>
+    </form>
+</app-page>

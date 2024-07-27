@@ -1,0 +1,89 @@
+<app-page [title]="title">
+    <form [formGroup]="form">
+        <section>
+            <div class="row">
+                <div class="col-6 p-2">
+                    <app-text-input label="Nombre"
+                                    [control]="form.controls.name"
+                                    [readonly]="true"></app-text-input>
+                </div>
+                <div class="col-6 p-2">
+                    <app-date-input label="Fecha de Venta"
+                                    [control]="form.controls.salesDate"
+                                    [readonly]="isViewAction"
+                                    messageWhenValueIsMissing="La fecha de venta es obligatoria"></app-date-input>
+                </div>
+                <div class="col-4 p-2">
+                    <app-number-input label="Unidades"
+                                      [control]="form.controls.units"
+                                      [readonly]="true"></app-number-input>
+                </div>
+                <div class="col-4 p-2">
+                    <app-number-input label="Precio (€)"
+                                      [control]="form.controls.price"
+                                      [readonly]="true"></app-number-input>
+                </div>
+                <div class="col-4 p-2">
+                    <app-number-input label="Beneficio (€)"
+                                      [control]="form.controls.profit"
+                                      [readonly]="true"></app-number-input>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 p-2">
+                    <h2>Productos ({{form.controls.products.controls.length}})</h2>
+                </div>
+                <div class="col-12 p-2"
+                     style="max-height: 400px; overflow: auto;"
+                     formArrayName="products">
+                    <ul class="list-group">
+                        <li *ngFor="let productGroup of form.controls.products.controls; index as i"
+                            class="list-group-item list-group-item-action list-group-item-dark">
+                            <app-product-sale-selector [index]="i"
+                                                       [formGroup]="productGroup"
+                                                       [isViewAction]="isViewAction"
+                                                       [isEditAction]="isEditAction"
+                                                       [isNewAction]="isNewAction"
+                                                       (onRemove)="removeProduct($event)"
+                                                       (onChange)="onProductChange()"></app-product-sale-selector>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <app-button type="primary"
+                                srcIcon="add.svg"
+                                style="margin-right: 5px; float: right;"
+                                (onClick)="addProduct()"
+                                *ngIf="!isViewAction"></app-button>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row justify-content-center">
+                <div class="col-auto p-2">
+                    <app-button text="Editar"
+                                type="primary"
+                                style="margin-right: 5px;"
+                                (onClick)="edit()"
+                                *ngIf="isViewAction"></app-button>
+                    <app-button text="Guardar"
+                                type="primary"
+                                style="margin-right: 5px;"
+                                (onClick)="save(false)"
+                                [disabled]="form.invalid"
+                                *ngIf="!isViewAction"></app-button>
+                    <app-button text="Guardar y Nuevo"
+                                type="primary"
+                                [outline]="true"
+                                style="margin-right: 5px;"
+                                (onClick)="save(true)"
+                                [disabled]="form.invalid"
+                                *ngIf="!isViewAction"></app-button>
+                    <app-button text="Cancelar"
+                                type="secondary"
+                                (onClick)="cancel()"></app-button>
+                </div>
+            </div>
+        </section>
+    </form>
+</app-page>

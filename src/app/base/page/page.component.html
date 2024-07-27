@@ -1,0 +1,12 @@
+<article>
+    <section class="p-4 container"
+             *ngIf="title">
+        <h1>{{title}}</h1>
+    </section>
+    <section *ngIf="!title">
+        <ng-content select="[header]"></ng-content>
+    </section>
+    <section class="container">
+        <ng-content></ng-content>
+    </section>
+</article>

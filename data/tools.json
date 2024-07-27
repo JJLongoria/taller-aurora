@@ -1,0 +1,32 @@
+[
+  {
+    "id": "cbda55bf-ef66-41b1-9e12-de4d23036845",
+    "name": "tes",
+    "description": "test",
+    "price": 3,
+    "location": "4",
+    "electric": true,
+    "power": 0,
+    "consumption": 0,
+    "amortizationUses": 10,
+    "usePrice": 0.3,
+    "amortized": true,
+    "uses": 11,
+    "broken": false,
+    "image": "D:/Workspace/Electron/epoxy/data/images/69fff7ca-746c-4f8f-b6d4-56c43f4d5938.jpg"
+  },
+  {
+    "id": "5a950f56-4736-435b-b127-f154f7a6dc33",
+    "name": "sdfsda",
+    "description": "fsdafsdf",
+    "price": 45,
+    "location": "3",
+    "electric": false,
+    "power": 0,
+    "consumption": 0,
+    "amortizationUses": 10,
+    "usePrice": 4.5,
+    "amortized": false,
+    "uses": 0
+  }
+]

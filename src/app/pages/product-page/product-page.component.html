@@ -1,0 +1,122 @@
+<app-page [title]="title">
+    <form [formGroup]="form">
+        <section>
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-12 p-2">
+                            <app-text-input label="Nombre"
+                                            [control]="form.controls.name"
+                                            messageWhenValueIsMissing="El nombre del producto es obligatorio"
+                                            [readonly]="isViewAction"></app-text-input>
+                        </div>
+                        <div class="col-12 p-2">
+                            <app-textarea-input label="Descripción"
+                                                [control]="form.controls.description"
+                                                [readonly]="isViewAction"></app-textarea-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 p-2 text-center"
+                     style="max-height: 250px;">
+                    <img *ngIf="imgPath"
+                         [src]="previewSrc"
+                         class="clickable"
+                         (click)="clickOnImage()"
+                         style="height: 100%; width: 100%; margin: 0 auto;" />
+                    <app-icon *ngIf="!imgPath"
+                              src="camera.svg"
+                              class="clickable"
+                              (onClick)="clickOnImage()"
+                              style="height: 100%; width: 100%; margin: 0 auto;"></app-icon>
+                </div>
+                <div class="col p-2">
+                    <app-number-input label="Precio Mínimo (€)"
+                                      [control]="form.controls.lowPrice"
+                                      [readonly]="true"></app-number-input>
+                </div>
+                <div class="col p-2">
+                    <app-number-input label="Precio Máximo (€)"
+                                      [control]="form.controls.highPrice"
+                                      [readonly]="true"></app-number-input>
+                </div>
+                <div class="col p-2">
+                    <app-number-input label="Precio Medio (€)"
+                                      [control]="form.controls.avgPrice"
+                                      [readonly]="true"></app-number-input>
+                </div>
+                <div class="col p-2">
+                    <app-number-input label="Unidades Producidas"
+                                      [control]="form.controls.unitsProduced"
+                                      [readonly]="true"></app-number-input>
+                </div>
+                <div class="col p-2">
+                    <app-number-input label="Unidades Vendidas"
+                                      [control]="form.controls.unitsSold"
+                                      [readonly]="true"></app-number-input>
+                </div>
+            </div>
+            <div class="row mt-2"
+                 *ngIf="!loadingVariants">
+                <div class="col-12">
+                    <h2>Variaciones del Producto ({{productVariants.length}})</h2>
+                </div>
+                <div class="col-12">
+                    <app-button text="Nueva Variación"
+                                type="primary"
+                                [outline]="true"
+                                style="margin-right: 5px; float: right;"
+                                (onClick)="newProductVariant()"
+                                *ngIf="!isViewAction"></app-button>
+                </div>
+                <div class="col-12"
+                     *ngIf="productVariants.length > 0">
+                    <app-datatable [columns]="columns"
+                                   [data]="productVariants"
+                                   [showRowNumber]="true"
+                                   [showCheckbox]="true"
+                                   keyField="id"
+                                   (onRowAction)="handleRowAction($event)">
+
+                    </app-datatable>
+                </div>
+                <div class="col-12"
+                     *ngIf="productVariants.length == 0">
+                    No hay variaciones de productos
+                </div>
+            </div>
+            <div *ngIf="loadingVariants">
+                <app-spinner></app-spinner>
+            </div>
+        </section>
+        <section>
+            <div class="row justify-content-center">
+                <div class="col-auto p-2">
+                    <app-button text="Editar"
+                                type="primary"
+                                style="margin-right: 5px;"
+                                (onClick)="edit()"
+                                *ngIf="isViewAction"></app-button>
+                    <app-button text="Guardar"
+                                type="primary"
+                                style="margin-right: 5px;"
+                                (onClick)="save(false)"
+                                [disabled]="form.invalid"
+                                *ngIf="!isViewAction"></app-button>
+                    <app-button text="Guardar y Nuevo"
+                                type="primary"
+                                [outline]="true"
+                                style="margin-right: 5px;"
+                                (onClick)="save(true)"
+                                [disabled]="form.invalid"
+                                *ngIf="!isViewAction"></app-button>
+                    <app-button text="Cancelar"
+                                type="secondary"
+                                (onClick)="cancel()"></app-button>
+                </div>
+            </div>
+        </section>
+    </form>
+</app-page>
+<app-product-variant-modal #productVariantModal></app-product-variant-modal>
+<app-image-viewer-modal #imageViewerModal></app-image-viewer-modal>

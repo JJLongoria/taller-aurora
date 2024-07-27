@@ -1,0 +1,25 @@
+<app-modal #modal
+           [title]="title">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-12 p-2">
+                <app-number-input label="Unidades Producidas"
+                                  [control]="form.controls.units"
+                                  help="Unidades Producidas"
+                                  messageWhenValueIsMissing="Las unidades producidas son obligatorias"
+                                  messageWhenWrongMinValue="Las unidades producidas deben ser mayor que 0"></app-number-input>
+            </div>
+        </div>
+    </form>
+    <div footer>
+        <app-button text="Guardar"
+                    type="primary"
+                    style="margin-right: 5px;"
+                    (onClick)="save()"
+                    [disabled]="form.invalid"
+                    *ngIf="!isViewAction"></app-button>
+        <app-button text="Cancelar"
+                    type="secondary"
+                    (onClick)="cancel()"></app-button>
+    </div>
+</app-modal>

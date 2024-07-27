@@ -1,0 +1,9 @@
+<span style="font-size: 12px;" class="badge text-bg-{{type}}">
+    <app-icon *ngIf="icon"
+              [name]="icon"
+              className="mr-2"></app-icon> {{label}} <button *ngIf="removable"
+            type="button"
+            class="btn-close ml-2"
+            aria-label="Close"
+            (click)="onRemoveClick()"></button>
+</span>

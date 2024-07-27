@@ -1,0 +1,108 @@
+<app-page [title]="title">
+    <form [formGroup]="form">
+        <section>
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-6 p-2">
+                            <app-text-input label="Nombre"
+                                            [control]="form.controls.name"
+                                            [readonly]="isViewAction"></app-text-input>
+                        </div>
+                        <div class="col-12 p-2">
+                            <app-textarea-input label="Descripción"
+                                                [control]="form.controls.description"
+                                                [readonly]="isViewAction"></app-textarea-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 p-2 text-center"
+                     style="max-height: 250px;">
+                    <img *ngIf="imgPath"
+                         [src]="previewSrc"
+                         class="clickable"
+                         (click)="clickOnImage()"
+                         style="height: 100%; width: 100%; margin: 0 auto;" />
+                    <app-icon *ngIf="!imgPath"
+                              src="camera.svg"
+                              class="clickable"
+                              (onClick)="clickOnImage()"
+                              style="height: 100%; width: 100%; margin: 0 auto;"></app-icon>
+                </div>
+                <div class="col-3 p-2">
+                    <app-number-input label="Precio (€)"
+                                      [control]="form.controls.price"
+                                      [readonly]="isViewAction"></app-number-input>
+                </div>
+                <div class="col-3 p-2">
+                    <app-number-input label="Usos para amortización"
+                                      [control]="form.controls.amortizationUses"
+                                      [readonly]="isViewAction"
+                                      messageWhenWrongMinValue="El valor mínimo es 1"
+                                      help="Usos mínimos de la herramienta para amortizar su compra. Este valor afecta al precio por uso"></app-number-input>
+                </div>
+                <div class="col-3 p-2">
+                    <app-number-input label="Precio por uso (€)"
+                                      [control]="form.controls.usePrice"
+                                      [readonly]="true"></app-number-input>
+                </div>
+                <div class="col-3 p-2">
+                    <app-number-input label="Nº de usos"
+                                      [control]="form.controls.uses"
+                                      [readonly]="true"></app-number-input>
+                </div>
+                <div class="col-3 p-2">
+                    <app-check-input label="Eléctrica"
+                                     style="margin-left: 15px; margin-top: 15px;"
+                                     [control]="form.controls.electric"
+                                     [readonly]="isViewAction"></app-check-input>
+                </div>
+                <div class="col-3 p-2">
+                    <app-number-input label="Potencia (W)"
+                                      [control]="form.controls.power"
+                                      messageWhenWrongMinValue="El valor mínimo es 0"
+                                      [readonly]="isViewAction || !form.controls.electric.value"></app-number-input>
+                </div>
+                <div class="col-3 p-2">
+                    <app-number-input label="Consumo (kW/h)"
+                                      [control]="form.controls.consumption"
+                                      [readonly]="true"></app-number-input>
+                </div>
+                <div class="col-3 p-2">
+                    <app-check-input label="Rota / En Desuso"
+                                     style="margin-left: 15px; margin-top: 15px;"
+                                     [control]="form.controls.broken"
+                                     [readonly]="isViewAction"></app-check-input>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row justify-content-center">
+                <div class="col-auto p-2">
+                    <app-button text="Editar"
+                                type="primary"
+                                style="margin-right: 5px;"
+                                (onClick)="edit()"
+                                *ngIf="isViewAction"></app-button>
+                    <app-button text="Guardar"
+                                type="primary"
+                                style="margin-right: 5px;"
+                                (onClick)="save(false)"
+                                [disabled]="form.invalid"
+                                *ngIf="!isViewAction"></app-button>
+                    <app-button text="Guardar y Nuevo"
+                                type="primary"
+                                [outline]="true"
+                                style="margin-right: 5px;"
+                                (onClick)="save(true)"
+                                [disabled]="form.invalid"
+                                *ngIf="!isViewAction"></app-button>
+                    <app-button text="Cancelar"
+                                type="secondary"
+                                (onClick)="cancel()"></app-button>
+                </div>
+            </div>
+        </section>
+    </form>
+</app-page>
+<app-image-viewer-modal #imageViewerModal></app-image-viewer-modal>

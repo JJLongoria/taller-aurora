@@ -1,0 +1,109 @@
+<div class="table-responsive">
+    <table class="table table-dark table-striped table-hover align-middle">
+        <thead *ngIf="!hideHeader">
+            <tr>
+                <th *ngFor="let column of columns"
+                    [className]="getHeaderClass(column)"
+                    [style]="getHeaderStyle(column)">
+                    <span>{{ column.label || column.name }}</span>
+                    <span *ngIf="column.actions"
+                          style="float: right; margin-right: 5px;"
+                          ngbDropdown>
+                        <a ngbDropdownToggle
+                           class="nav-link dropdown-toggle-link"
+                           style="cursor: pointer; border: 1px solid #C5C5C5; border-radius: 20%;">
+                            <app-icon src="arrow-drop-down-rounded.svg"
+                                      [height]="24"></app-icon>
+                        </a>
+                        <ul ngbDropdownMenu
+                            class="dropdown-menu dropdown-menu-dark">
+                            <li *ngFor="let action of column.actions"
+                                class="dropdown-list-item"><a ngbDropdownItem
+                                   class="dropdown-item"
+                                   (click)="handleCellAction(action, column)"
+                                   style="cursor: pointer;">
+                                    <app-icon *ngIf="action.icon && (!action.icon.position || action.icon.position === 'left')"
+                                              [name]="action.icon.name"></app-icon>
+                                    <span *ngIf="!column.typeAttributes?.collapse">{{action.label}}</span>
+                                    <app-icon *ngIf="action.icon && (action.icon.position === 'right')"
+                                              [name]="action.icon.name"></app-icon>
+                                </a>
+                            </li>
+                        </ul>
+                    </span>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr *ngFor="let row of data; index as rowIndex">
+                <td *ngFor="let column of columns"
+                    [className]="getCellClass(column)"
+                    [style]="getCellStyle(column)">
+                    <span *ngIf="column.type === 'action'">
+                        <span *ngIf="column.typeAttributes?.showAsMenu"
+                              ngbDropdown
+                              style="float: right; margin-right: 25px;"
+                              display="dynamic"
+                              container="body"
+                              [placement]="column.typeAttributes?.menuAlign || 'bottom-end'">
+                            <a ngbDropdownToggle
+                               class="nav-link dropdown-toggle-link"
+                               style="cursor: pointer; border: 1px solid #C5C5C5; border-radius: 20%;">
+                                <app-icon src="arrow-drop-down-rounded.svg"
+                                          [height]="24"></app-icon>
+                            </a>
+                            <ul ngbDropdownMenu
+                                class="dropdown-menu dropdown-menu-dark">
+                                <li *ngFor="let action of getActions(column.rowActions, row)"
+                                    class="dropdown-list-item"><a ngbDropdownItem
+                                       class="dropdown-item"
+                                       (click)="handleRowAction(action, row, rowIndex)"
+                                       style="cursor: pointer;">
+                                        <app-icon *ngIf="action.icon && (!action.icon.position || action.icon.position === 'left')"
+                                                  [name]="action.icon.name"
+                                                  [src]="action.icon.src"></app-icon>
+                                        <span *ngIf="!column.typeAttributes?.collapse">{{action.label}}</span>
+                                        <app-icon *ngIf="action.icon && (action.icon.position === 'right')"
+                                                  [name]="action.icon.name"
+                                                  [src]="action.icon.src"></app-icon>
+                                    </a>
+                                </li>
+                            </ul>
+                        </span>
+                        <span *ngIf="!column.typeAttributes?.showAsMenu">
+                            <span *ngFor="let action of getActions(column.rowActions, row)"
+                                  style="margin-left: 5px;">
+                                <app-button *ngIf="action.icon && column.typeAttributes?.collapse"
+                                            icon="{{action.icon.name}}"
+                                            srcIcon="{{action.icon.src}}"
+                                            (onClick)="handleRowAction(action, row, rowIndex)"></app-button>
+                                <app-button *ngIf="action.icon && !column.typeAttributes?.collapse"
+                                            icon="{{action.icon.name}}"
+                                            srcIcon="{{action.icon.src}}"
+                                            [text]="action.label"
+                                            [iconPosition]="action.icon.position"
+                                            (onClick)="handleRowAction(action, row, rowIndex)"></app-button>
+                                <app-button *ngIf="!action.icon"
+                                            [text]="action.label"
+                                            (onClick)="handleRowAction(action, row, rowIndex)"></app-button>
+                            </span>
+                        </span>
+                    </span>
+                    <span *ngIf="column.type !== 'action' && column.type !== 'boolean' && column.link && !column.link.onClick"><a [routerLink]="getLink(row, column)" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{ getCellData(row, column) }}</a></span>
+                    <span *ngIf="column.type !== 'action' && column.type !== 'boolean' && column.link && column.link.onClick"><a herf="#" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover clickable" (click)="column.link.onClick(row, rowIndex)">{{ getCellData(row, column) }}</a></span>
+                    <span *ngIf="column.type !== 'action' && column.type !== 'boolean' && !column.link">{{ getCellData(row, column) }}</span>
+                    <span *ngIf="column.type !== 'action' && column.type === 'boolean'">
+                        <app-check-input [value]="getCellData(row, column)"
+                                         [readonly]="true"
+                                         [disabled]="true">
+                        </app-check-input>
+                    </span>
+                    <span *ngIf="column.type !== 'action' && editable && column.editable"
+                          style="float: right;">
+                        <app-button icon="gg:edit"></app-button>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

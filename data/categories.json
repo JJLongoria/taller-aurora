@@ -1,0 +1,21 @@
+[
+  {
+    "id": "04cca64c-cbc1-4ebb-b243-0dedbc72b416",
+    "name": "test",
+    "description": "asdasd"
+  },
+  {
+    "id": "90e3f711-ef02-4f1b-bffc-5213e80c99c3",
+    "name": "mica",
+    "description": "Categoria para agrupar todas las micas"
+  },
+  {
+    "id": "20fe88ac-f6af-4c69-be77-885483e10682",
+    "name": "asdfsdaf",
+    "description": "sadfasdfasdf"
+  },
+  {
+    "id": "6d288d62-daae-4e49-abef-7ed2a420fdb2",
+    "name": "tinte"
+  }
+]

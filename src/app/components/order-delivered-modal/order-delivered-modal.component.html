@@ -1,0 +1,31 @@
+<app-modal #modal
+           [title]="title">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-6 p-2">
+                <app-number-input label="Pago (€)"
+                                  [control]="form.controls.paidment"
+                                  help="Dinero pagado por el encargo"
+                                  messageWhenWrongMinValue="El pago por el encargo debe ser mayor o igual que 0"
+                                  messageWhenValueIsMissing="El pago por el encargo es obligatorio"></app-number-input>
+            </div>
+            <div class="col-6 p-2">
+                <app-date-input label="Fecha de Entrga"
+                                [control]="form.controls.deliveryDate"
+                                help="Fecha en la que se entregó el encargo"
+                                messageWhenValueIsMissing="La fecha de entrega del encargo es obligatoria"></app-date-input>
+            </div>
+        </div>
+    </form>
+    <div footer>
+        <app-button text="Guardar"
+                    type="primary"
+                    style="margin-right: 5px;"
+                    (onClick)="save()"
+                    [disabled]="form.invalid"
+                    *ngIf="!isViewAction"></app-button>
+        <app-button text="Cancelar"
+                    type="secondary"
+                    (onClick)="cancel()"></app-button>
+    </div>
+</app-modal>

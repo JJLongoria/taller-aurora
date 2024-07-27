@@ -1,0 +1,36 @@
+<app-page title="Ayuda">
+    <div class="row">
+        <div class="col-2">
+            <h2>Menu</h2>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action list-group-item-dark"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                       routerLink="introduction"
+                       routerLinkActive="active">Introducción</a></li>
+                <li class="list-group-item list-group-item-action list-group-item-dark"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                       routerLink="materials"
+                       routerLinkActive="active">Materiales</a></li>
+                <li class="list-group-item list-group-item-action list-group-item-dark"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                       routerLink="tools"
+                       routerLinkActive="active">Herramientas</a></li>
+                <li class="list-group-item list-group-item-action list-group-item-dark"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                       routerLink="purchases"
+                       routerLinkActive="active">Compras</a></li>
+                <li class="list-group-item list-group-item-action list-group-item-dark"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                       routerLink="products"
+                       routerLinkActive="active">Productos</a></li>
+                <li class="list-group-item list-group-item-action list-group-item-dark"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                       routerLink="clients"
+                       routerLinkActive="active">Clientes</a></li>
+                <li class="list-group-item list-group-item-action list-group-item-dark"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                       routerLink="orders"
+                       routerLinkActive="active">Encargos</a></li>
+                <li class="list-group-item list-group-item-action list-group-item-dark"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                       routerLink="sales"
+                       routerLinkActive="active">Ventas</a></li>
+            </ul>
+        </div>
+        <div class="col-10">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</app-page>

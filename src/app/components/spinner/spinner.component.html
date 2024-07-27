@@ -1,0 +1,11 @@
+<div class="row {{rowClass()}}">
+    <div class="col-12">
+        <div [class]="type" [style]="spinnerStyle()"></div>
+        <div class="col-12 text-center">
+            <h3 class="fw-bold color-grey-dark" *ngIf="title">{{title}}</h3>
+            <h4 *ngIf="subtitle" class="color-grey-dark">{{subtitle}}</h4>
+            <p *ngIf="message" class="color-grey-dark">{{message}}</p>
+        </div>
+    </div>
+</div>
+

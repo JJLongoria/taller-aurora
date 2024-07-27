@@ -1,0 +1,151 @@
+<app-page [title]="title">
+    <form [formGroup]="form">
+        <section>
+            <div class="row">
+                <div class="col-6 p-2">
+                    <app-date-input label="Fecha de Compra"
+                                    [control]="form.controls.date"
+                                    [disabled]="isViewAction"></app-date-input>
+                </div>
+                <div class="col-6 p-2">
+                    <app-text-input label="Nombre del Vendedor"
+                                    [control]="form.controls.sellerName"
+                                    [disabled]="isViewAction"
+                                    messageWhenValueIsMissing="El nombre del vendedor es obligatorio"></app-text-input>
+                </div>
+                <div class="col-6 p-2">
+                    <app-text-input label="URL del Vendedor"
+                                    [control]="form.controls.sellerUrl"
+                                    [disabled]="isViewAction"
+                                    messageWhenValueIsMissing="La URL del vendedor es obligatoria"></app-text-input>
+                </div>
+                <div class="col-12 p-2">
+                    <app-textarea-input label="Descripción"
+                                        [control]="form.controls.description"
+                                        [disabled]="isViewAction"></app-textarea-input>
+                </div>
+                <div class="col-6 p-2">
+                    <app-check-input label="No actualizar la cantidad de material"
+                                     style="margin-top: 10px"
+                                     [control]="form.controls.notUpdateMaterialsQuantity"
+                                     [disabled]="isViewAction"></app-check-input>
+                </div>
+                <div class="col-6 p-2">
+                    <app-check-input label="No actualizar los precios del material"
+                                     style="margin-top: 10px"
+                                     [control]="form.controls.notUpdateMaterialsPrice"
+                                     [disabled]="isViewAction"></app-check-input>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <h2>Precio</h2>
+                <div class="col-6 p-2">
+                    <app-select-input label="Precio por"
+                                      [control]="form.controls.priceCalculation"
+                                      [values]="priceCalculationOptions"
+                                      firstValueLabel="Selecciona una forma de calcular el precio"
+                                      messageWhenValueIsMissing="La forma de calcular el precio es obligatoria"
+                                      help="Forma para calcular el precio de la compra. En función del valor elegido se ofrecerán distintas opciones para ajustar mejor la compra"></app-select-input>
+                </div>
+                <div class="col-6 p-2">
+                    <app-select-input label="Escala"
+                                      *ngIf="scaleOptions"
+                                      [control]="form.controls.scale"
+                                      firstValueLabel="Selecciona una escala"
+                                      [values]="scaleOptions"
+                                      messageWhenValueIsMissing="La escala es obligatoria"
+                                      help="Escala para el calculo de los materiales y precios"></app-select-input>
+                </div>
+                <div [ngClass]="this.showUnits ? 'col-3 p-2' : 'col-4 p-2'">
+                    <app-number-input label="Precio"
+                                      [control]="form.controls.totalPrice"
+                                      [disabled]="isViewAction"
+                                      messageWhenWrongMinValue="El precio debe ser mayor que 0"
+                                      messageWhenValueIsMissing="El precio es obligatorio">
+                    </app-number-input>
+                </div>
+                <div *ngIf="showUnits"
+                     class="col-3 p-2">
+                    <app-number-input label="Unidades"
+                                      [control]="form.controls.units"
+                                      messageWhenValueIsMissing="Las unidades son obligatorias"
+                                      messageWhenWrongMinValue="Las unidades deben ser mayor que 0"
+                                      [disabled]="isViewAction"></app-number-input>
+                </div>
+                <div [ngClass]="this.showUnits ? 'col-3 p-2' : 'col-4 p-2'">
+                    <app-number-input [label]="quantityLabel"
+                                      [control]="form.controls.quantity"
+                                      messageWhenValueIsMissing="La cantidad es obligatoria"
+                                      [disabled]="isViewAction">
+                        <app-button type="secondary"
+                                    [outline]="true"
+                                    srcIcon="calculator.svg"
+                                    [iconSize]="15"
+                                    (onClick)="openSurfaceCalculator()"
+                                    *ngIf="calculateSurface"></app-button>
+                    </app-number-input>
+                </div>
+                <div [ngClass]="this.showUnits ? 'col-3 p-2' : 'col-4 p-2'">
+                    <app-number-input label="Precio Relativo ({{unitPrice}})"
+                                      [control]="form.controls.relativePrice"
+                                      [disabled]="true">
+
+                    </app-number-input>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <h2>{{materialsLabel}}</h2>
+                <div class="col-12 p-2"
+                     style="max-height: 400px; overflow: auto;"
+                     formArrayName="materialIds">
+                    <ul class="list-group">
+                        <li *ngFor="let materialGroup of form.controls.materialIds.controls; index as i"
+                            class="list-group-item list-group-item-action list-group-item-dark">
+                            <app-purchase-material-selector [index]="i"
+                                                            [formGroup]="materialGroup"
+                                                            [isViewAction]="isViewAction"
+                                                            [isEditAction]="isEditAction"
+                                                            [isNewAction]="isNewAction"
+                                                            (onRemove)="removeMaterial($event)"></app-purchase-material-selector>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <app-button srcIcon="add.svg"
+                                type="primary"
+                                style="margin-right: 5px; float: right;"
+                                (onClick)="addMaterial()"
+                                *ngIf="!isViewAction && multiMaterial"></app-button>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row justify-content-center">
+                <div class="col-auto p-2">
+                    <app-button text="Editar"
+                                type="primary"
+                                style="margin-right: 5px;"
+                                (onClick)="edit()"
+                                *ngIf="isViewAction"></app-button>
+                    <app-button text="Guardar"
+                                type="primary"
+                                style="margin-right: 5px;"
+                                (onClick)="save(false)"
+                                [disabled]="form.invalid"
+                                *ngIf="!isViewAction"></app-button>
+                    <app-button text="Guardar y Nuevo"
+                                type="primary"
+                                [outline]="true"
+                                style="margin-right: 5px;"
+                                (onClick)="save(true)"
+                                [disabled]="form.invalid"
+                                *ngIf="!isViewAction"></app-button>
+                    <app-button text="Cancelar"
+                                type="secondary"
+                                (onClick)="cancel()"></app-button>
+                </div>
+            </div>
+        </section>
+    </form>
+</app-page>
+<app-surface-calculator #surfaceCalculatorModal></app-surface-calculator>
